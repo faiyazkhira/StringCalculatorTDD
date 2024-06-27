@@ -22,3 +22,8 @@ test('should return the sum of two numbers', () => {
     expect(add("2,2,4")).toBe(8);
     expect(add("3,5,67")).toBe(75);
 });
+
+//TC005 - Handling New Lines Between Numbers
+test('should handle new lines between numbers', () => {
+    expect(add("1\n2,3")).toBe(6);
+});
