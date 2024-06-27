@@ -16,3 +16,9 @@ test('should return the sum of two numbers', () => {
     expect(add("1,2")).toBe(3);
     expect(add("3,5")).toBe(8);
 });
+
+//TC004 - Handling more than Two Numbers
+test('should return the sum of two numbers', () => {
+    expect(add("2,2,4")).toBe(8);
+    expect(add("3,5,67")).toBe(75);
+});
