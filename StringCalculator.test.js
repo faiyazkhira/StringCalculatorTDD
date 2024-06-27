@@ -39,3 +39,23 @@ test('should throw an error for negative numbers', () => {
     expect(() => add("1,-2,3")).toThrow("negative numbers not allowed: -2");
     expect(() => add("1,-2,-3")).toThrow("negative numbers not allowed: -2,-3");
 });
+
+//TC008 - Ignore numbers bigger than 1000
+test('should ignore numbers bigger than 1000', () => {
+    expect(add("2,1001")).toBe(2);
+});
+
+//TC009 - Support delimiters of any length
+test('should support delimiters of any length', () => {
+    expect(add("//[***]\n1***2***3")).toBe(6);
+});
+
+//TC010 - Support multiple delimiters
+test('should support multiple delimiters', () => {
+    expect(add("//[*][%]\n1*2%3")).toBe(6);
+});
+
+//TC011 - Support multiple delimiters with length greater than one character
+test('should support multiple delimiters with length longer than one char', () => {
+    expect(add("//[***][%%%]\n1***2%%%3")).toBe(6);
+});

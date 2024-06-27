@@ -6,7 +6,15 @@ function add(numbers) {
     if (numbers.startsWith("//")) {
         const delimiterEndIndex = numbers.indexOf('\n');
         let delimiterStr = numbers.substring(2, delimiterEndIndex);
-        delimiterStr = delimiterStr.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'); // Escape special characters in delimiter
+
+        //Handling multiple delimiters
+        if (delimiterStr.startsWith("[")) {
+            delimiterStr = delimiterStr.substring(1, delimiterStr.length - 1);
+            delimiterStr = delimiterStr.split("][").map(d => d.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')).join('|');
+        } else {
+            delimiterStr = delimiterStr.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'); // Escape special characters in delimiter
+        }
+
         delimiter = new RegExp(delimiterStr);
         numbers = numbers.substring(delimiterEndIndex + 1);
     }
@@ -18,7 +26,7 @@ function add(numbers) {
         throw new Error(`negative numbers not allowed: ${negatives.join(",")}`);
     }
 
-    return numArray.reduce((sum, num) => sum + num, 0);
+    return numArray.filter(num => num <= 1000).reduce((sum, num) => sum + num, 0);
 }
 
 module.exports = add;
